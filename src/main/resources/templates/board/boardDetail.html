@@ -44,27 +44,27 @@
         <input type="hidden" id="boardIdx" name="boardIdx" th:value="${board.boardIdx }">
     </form>
 
-    <a href="#this" id="list" class="btn">목록으로</a>
-    <a href="#this" id="edit" class="btn">수정하기</a>
-    <a href="#this" id="delete" class="btn">삭제하기</a>
+    <a id="list" class="btn">목록으로</a>
+    <a id="edit" class="btn">수정하기</a>
+    <a id="delete" class="btn">삭제하기</a>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         $("#list").on("click", function(){
-            location.href = "/board/openBoardList.do";
+            location.href = "/board/boardList";
         });
 
         $("#edit").on("click", function(){
             var frm = $("#frm")[0];
-            frm.action = "/board/updateBoard.do";
+            frm.action = "/board/updateBoard";
             frm.submit();
         });
 
         $("#delete").on("click", function(){
             var frm = $("#frm")[0];
-            frm.action = "/board/deleteBoard.do";
+            frm.action = "/board/deleteBoard";
             frm.submit();
         });
     });

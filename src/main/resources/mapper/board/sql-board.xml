@@ -16,4 +16,54 @@
             ORDER BY board_idx DESC
         ]]>
     </select>
+
+    <insert id = "insertBoard" parameterType="kr.ac.jejunu.educom.yechankim.dto.BoardDto">
+        <![CDATA[
+            INSERT INTO t_board
+            (title, contents, created_datetime, creator_id)
+            VALUES (#{title}, #{contents}, NOW(), 'admin');
+        ]]>
+    </insert>
+
+    <update id = "updateHitCount" parameterType="int">
+        <![CDATA[
+            UPDATE t_board
+            SET hit_cnt = hit_cnt + 1
+            WHERE board_idx = #{boardIdx}
+        ]]>
+    </update>
+
+    <select id = "selectBoardDetail" parameterType="int" resultType="kr.ac.jejunu.educom.yechankim.dto.BoardDto">
+        <![CDATA[
+            SELECT
+                board_idx, title, contents, hit_cnt,
+                DATE_FORMAT(created_datetime, '%Y.%m.%d %H:%i:%s') AS CREATED_DATETIME,
+                creator_id
+            FROM
+                t_board
+            WHERE
+                board_idx = #{boardIdx} AND deleted_yn = 'N'
+        ]]>
+    </select>
+
+    <update id = "updateBoard" parameterType="kr.ac.jejunu.educom.yechankim.dto.BoardDto">
+        <![CDATA[
+            UPDATE t_board SET
+                title = #{title},
+                contents = #{contents},
+                updated_datetime = NOW()
+            WHERE
+                board_idx = #{boardIdx}
+        ]]>
+    </update>
+
+    <update id = "deleteBoard" parameterType="int">
+        <![CDATA[
+            UPDATE t_board SET
+                deleted_yn = 'y',
+                updated_datetime = NOW()
+            WHERE
+                board_idx = #{boardIdx}
+        ]]>
+    </update>
 </mapper>
