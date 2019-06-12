@@ -12,9 +12,9 @@ public class RestAPIBoardController {
     @Autowired
     private BoardService boardService;
 
-    private static String boardListURI = "redirect:/board/boardList";
+    private static String boardListURI = "redirect:/board";
 
-    @RequestMapping(value="/api/board/boardList", method= RequestMethod.GET)
+    @RequestMapping(value="/api/board", method= RequestMethod.GET)
     public List<BoardDto> openBoardList() throws Exception {
         return boardService.selectBoardList();
     }
@@ -32,12 +32,12 @@ public class RestAPIBoardController {
     @RequestMapping(value="/api/board/{boardIdx}", method=RequestMethod.PUT)
     public String updateBoard(@RequestBody BoardDto board) throws Exception {
         boardService.updateBoard(board);
-        return "redirect:/board";
+        return boardListURI;
     }
 
     @RequestMapping(value="/api/board/{boardIdx}", method=RequestMethod.DELETE)
     public String deleteBoard(@PathVariable("boardIdx") int boardIdx) throws Exception {
         boardService.deleteBoard(boardIdx);
-        return "redirect:/board";
+        return boardListURI;
     }
 }
