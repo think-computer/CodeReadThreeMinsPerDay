@@ -97,20 +97,20 @@
         var boardIdx = $("#boardIdx").val();
 
         $("#list").on("click", function() {
-            location.href = "/board";
+            location.href = "/jpa/board";
         })
 
         $("#edit").on("click", function(){
             $("#method").val("put");
             var form = $("#boardForm")[0];
-            form.action = "/board/"+boardIdx;
+            form.action = "/jpa/board/"+boardIdx;
             form.submit();
         });
 
         $("#delete").on("click", function(){
             $("#method").val("delete");
             var form = $("#boardForm")[0];
-            form.action = "/board/"+boardIdx;
+            form.action = "/jpa/board/"+boardIdx;
             form.submit();
         });
     });

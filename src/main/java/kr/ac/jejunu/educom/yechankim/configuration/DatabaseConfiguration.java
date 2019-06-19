@@ -16,6 +16,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 @Configuration
 @PropertySource("classpath:/application.properties")
@@ -64,5 +65,10 @@ public class DatabaseConfiguration {
     @Bean
     public PlatformTransactionManager transactionManager() throws Exception {
         return new DataSourceTransactionManager(dataSource());
+    }
+
+    @ConfigurationProperties(prefix="spring.jpa")
+    public Properties hibernateConfig() {
+        return new Properties();
     }
 }

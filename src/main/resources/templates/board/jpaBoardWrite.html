@@ -43,25 +43,22 @@
             <div class="col-sm-9 col-md-7 col-lg-9 mx-auto">
                 <div class="card card-signin my-5" style = "height: 750px;">
                     <div class="card-body">
-                        <h5 class="card-title text-center">게시글 열람 #<span th:text="${board.boardIdx}"></span> </h5>
-                        <form class="form-signin" id="boardForm" method="post">
+                        <h5 class="card-title text-center">게시글 작성</h5>
+                        <form class="form-signin" id = "frm" name = "frm" method = "post" action = "/jpa/board/write" enctype="multipart/form-data">
                             <div class="form-label-group">
-                                <input th:value = "${board.title}" type="text" name="title" id="title" class="form-control" required autofocus>
+                                <input type="text" name="title" id="title" class="form-control" placeholder="Title">
                                 <label for="title">제목</label>
                             </div>
 
                             <div class="form-label-group">
-                                <textarea th:text = "${board.contents}" style = "height: 340px;" name = "contents" id="contents" class="form-control" required></textarea>
+                                <textarea style = "height: 365px;" name = "contents" id="contents" class="form-control" placeholder="내용을 입력하십시오."></textarea>
                                 <!-- <label for="contents">내용</label> -->
                             </div>
 
-                            <input type="hidden" id="boardIdx" name="boardIdx" th:value="${board.boardIdx}">
-                            <input type="hidden" id="method" name="_method">
-
                             <hr class="my-4">
-                            <a id = "edit" class="btn btn-lg btn-primary btn-block text-uppercase" style="color: white;">수정</a>
-                            <a id = "delete" class="btn btn-lg btn-primary btn-block text-uppercase" style="border: yellowgreen; background: yellowgreen;">삭제</a>
-                            <a id = "list" class="btn btn-lg btn-primary btn-block text-uppercase" style="border: deepskyblue; background: deepskyblue;">돌아가기</a>
+                            <input type = "submit" id = "submit" value = "저장" class="btn btn-lg btn-primary btn-block text-uppercase">
+                            <!-- <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">저장</button> -->
+                            <a class="btn btn-lg btn-primary btn-block text-uppercase" style="border: yellowgreen; background: yellowgreen;" href="javascript:history.back()">취소</a>
                         </form>
                     </div>
                 </div>
@@ -90,31 +87,6 @@
 
 <!-- Custom scripts for this template -->
 <script src="js/creative.min.js"></script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        var boardIdx = $("#boardIdx").val();
-
-        $("#list").on("click", function() {
-            location.href = "/board";
-        })
-
-        $("#edit").on("click", function(){
-            $("#method").val("put");
-            var form = $("#boardForm")[0];
-            form.action = "/board/"+boardIdx;
-            form.submit();
-        });
-
-        $("#delete").on("click", function(){
-            $("#method").val("delete");
-            var form = $("#boardForm")[0];
-            form.action = "/board/"+boardIdx;
-            form.submit();
-        });
-    });
-</script>
 
 </body>
 </html>
