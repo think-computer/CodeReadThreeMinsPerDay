@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,18 +9,18 @@
     <title>하루 3분 코드 읽기 - 김예찬</title>
 
     <!-- Font Awesome Icons -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR|Yeon+Sung" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet">
 
     <!-- Plugin CSS -->
-    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link th:href="@{/vendor/magnific-popup/magnific-popup.css}" rel="stylesheet">
 
     <!-- Theme CSS - Includes Bootstrap -->
-    <link href="css/creative.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/login.css">
+    <link th:href="@{/css/creative.css}" rel="stylesheet">
+    <link th:href="@{/css/login.css}" rel="stylesheet">
 
 </head>
 <body id="page-top">
