@@ -21,7 +21,6 @@
     <!-- Theme CSS - Includes Bootstrap -->
     <link th:href="@{/css/board.css}" rel="stylesheet">
 
-<!--    <link th:href="@{/css/style.css}" rel="stylesheet">-->
 </head>
 <body id="page-top">
 
@@ -35,13 +34,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto my-2 my-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="/jpa/mypage">마이 페이지</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="/jpa/main">코드 읽기</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="/board">공지사항 확인하기</a>
+                    <a class="nav-link js-scroll-trigger">하루 3분 알고리즘 소스 등록</a>
                 </li>
             </ul>
         </div>
@@ -52,39 +45,35 @@
 <header class="masthead">
     <div class="container">
         <div class="row">
-            <div class="col-sm-9 col-md-7 col-lg-12 mx-auto">
-                <div class="card card-signin my-5" style = "height: 750px;">
+            <div class="col-sm-9 col-md-7 col-lg-9 mx-auto">
+                <div class="card card-signin my-5" style = "height: 835px;">
                     <div class="card-body">
-                        <h5 class="card-title text-center">게시글</h5>
-                        <table class="board_list">
-                            <colgroup>
-                                <col width="15%"/>
-                                <col width="*"/>
-                                <col width="15%"/>
-                                <col width="20%"/>
-                            </colgroup>
-                            <thead>
-                            <tr>
-                                <th scope="col">글번호</th>
-                                <th scope="col">제목</th>
-                                <th scope="col">조회수</th>
-                                <th scope="col">작성일</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:if="${#lists.size(list)} > 0" th:each="list : ${list}">
-                                <td th:text="${list.boardIdx}"></td>
-                                <td class="title"><a href="/jpa/board/" th:attrappend="href=${list.boardIdx}" th:text="${list.title}"></a></td>
-                                <td th:text="${list.hitCnt}"></td>
-                                <td th:text="${list.createdDatetime}"></td>
-                            </tr>
+                        <h5 class="card-title text-center">하루 3분 알고리즘 소스 작성</h5>
+                        <form class="form-signin" id = "frm" name = "frm" method = "post" action = "/jpa/source/write" enctype="multipart/form-data">
+                            <div class="form-label-group">
+                                <input type="text" name="title" id="title" class="form-control" placeholder="Title" required autofocus>
+                                <label for="title">제목</label>
+                            </div>
 
-                            <tr th:unless="${#lists.size(list)} > 0">
-                                <td colspan="4">조회된 결과가 없습니다.</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <a id="write" href="/jpa/board/write" class="btn btn-primary btn-xl js-scroll-trigger">글쓰기</a>
+                            <div class="form-label-group">
+                                <input type="text" name="category" id="category" class="form-control" placeholder="Category" required>
+                                <label for="category">유형</label>
+                            </div>
+
+                            <div class="form-label-group">
+                                <input type="text" name = "videoUrl" id="videoUrl" class="form-control" placeholder="VideoURL" required>
+                                <label for="videoUrl">알고리즘 소개 비디오 URL</label>
+                            </div>
+
+                            <div class="form-label-group">
+                                <textarea style = "height: 355px;" name = "source" id = "source" class="form-control" placeholder="소스를 입력하십시오."></textarea>
+                            </div>
+
+                            <hr class="my-4">
+                            <input type = "submit" id = "submit" value = "저장" class="btn btn-lg btn-primary btn-block text-uppercase">
+                            <!-- <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">저장</button> -->
+                            <a class="btn btn-lg btn-primary btn-block text-uppercase" style="border: yellowgreen; background: yellowgreen;" href="javascript:history.back()">취소</a>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -92,12 +81,13 @@
     </div>
 </header>
 
+
 <!-- Footer -->
 <footer class="bg-light py-5">
     <div class="container">
         <div class="small text-center text-muted">Copyright &copy; 2019, 포털서비스개발방법론 프로젝트, 김예찬 (컴퓨터교육과)</div>
         <br>
-<!--        <div class="small text-center "><i class="far fa-hand-point-right"></i>&nbsp; 본 사이트는 <a href = "https://startbootstrap.com/">Start Bootstrap</a> 사에서 제공하는 테마를 기반으로 제작되었습니다.&nbsp;<i class="far fa-hand-point-left"></i></div>-->
+        <!--        <div class="small text-center "><i class="far fa-hand-point-right"></i>&nbsp; 본 사이트는 <a href = "https://startbootstrap.com/">Start Bootstrap</a> 사에서 제공하는 테마를 기반으로 제작되었습니다.&nbsp;<i class="far fa-hand-point-left"></i></div>-->
     </div>
 </footer>
 

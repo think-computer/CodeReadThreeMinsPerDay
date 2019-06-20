@@ -1,7 +1,6 @@
 package kr.ac.jejunu.educom.yechankim.service;
 
 import kr.ac.jejunu.educom.yechankim.entity.BoardEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.List;

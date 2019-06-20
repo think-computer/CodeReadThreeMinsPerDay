@@ -17,9 +17,9 @@ public class JpaMainController {
     public ModelAndView openReadCodes() throws Exception {
         ModelAndView modelAndView = new ModelAndView("main/jpaFamousSaying");
 
-        int maxNo = (int) jpaMainService.getRecordsCount();
+        long maxNo = jpaMainService.getRecordsCount();
 
-        FamousSayingEntity famousSaying = jpaMainService.selectFamousSaying(jpaMainService.getRandomNumber(maxNo));
+        FamousSayingEntity famousSaying = jpaMainService.selectFamousSaying(jpaMainService.getRandomNumber((int) maxNo));
         modelAndView.addObject("famousSaying", famousSaying);
 
         return modelAndView;

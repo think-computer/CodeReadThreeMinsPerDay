@@ -19,69 +19,66 @@
     <link th:href="@{/vendor/magnific-popup/magnific-popup.css}" rel="stylesheet">
 
     <!-- Theme CSS - Includes Bootstrap -->
-    <link th:href="@{/css/main.css}" rel="stylesheet">
+    <link th:href="@{/css/board.css}" rel="stylesheet">
+
+<!--    <link th:href="@{/css/style.css}" rel="stylesheet">-->
 </head>
 <body id="page-top">
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
     <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="index">하루 3분 코드 읽기</a>
+        <a class="navbar-brand js-scroll-trigger" href="/index">하루 3분 코드 읽기</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto my-2 my-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="/jpa/mypage">마이 페이지</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="/jpa/main">코드 읽기</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="/jpa/board">공지사항 확인하기</a>
+                    <a class="nav-link js-scroll-trigger">하루 3분 알고리즘 소스 등록</a>
                 </li>
             </ul>
-<!--            <ul class="navbar-nav ml-auto my-2 my-lg-0">-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link js-scroll-trigger" href="#about">김예찬(think.computer@jejunu.ac.kr) 님 환영합니다.</a>-->
-<!--                </li>-->
-<!--            </ul>-->
         </div>
     </div>
 </nav>
 
 <!-- Masthead -->
 <header class="masthead">
-    <div class="container h-100">
-        <div class="row h-100 align-items-center justify-content-center text-center">
-            <div class="col-lg-6 mb-4">
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">오늘의 명언</h6>
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-12 mx-auto">
+                <div class="card card-signin my-5" style = "height: 750px;">
                     <div class="card-body">
-                        <div class="text-center">
-                            <img th:src="${famousSaying.celebPhotoUrl}" class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="height: 15rem;"alt="오늘의 위인">
-                        </div>
-                        <p th:text="${famousSaying.saying}"></p>
-                        <h5 th:text="${famousSaying.celebName}"></h5>
+                        <h5 class="card-title text-center">하루 3분 알고리즘 소스 목록</h5>
+                        <table class="board_list">
+                            <colgroup>
+                                <col width="15%"/>
+                                <col width="*"/>
+                                <col width="15%"/>
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">제목</th>
+                                <th scope="col">유형</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:if="${#lists.size(list)} > 0" th:each="list : ${list}">
+                                <td th:text="${list.idx}"></td>
+                                <td class="title"><a href="/jpa/source/" th:attrappend="href=${list.idx}" th:text="${list.title}"></a></td>
+                                <td th:text="${list.category}"></td>
+                            </tr>
 
-                        <hr class="my-4">
-                        <h6 th:text="${famousSaying.celebInfo}"></h6>
+                            <tr th:unless="${#lists.size(list)} > 0">
+                                <td colspan="4">조회된 결과가 없습니다.</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <a id="write" href="/jpa/source/write" class="btn btn-primary btn-xl js-scroll-trigger">글쓰기</a>
                     </div>
                 </div>
             </div>
-
-            <div class="col-lg-10 align-self-end">
-                <a class="btn btn-primary btn-xl js-scroll-trigger" href="">오늘의 하루 3분 코드 읽기</a>
-                <hr class="divider my-4">
-            </div>
-
-            <div class="col-lg-8 align-self-baseline">
-                <p class="text-white-75 font-weight-light mb-5">튜토리얼 영상이 필요하신가요? <a id = "tutorial" href="">클릭하세요.</a></p>
-            </div>
-
         </div>
     </div>
 </header>
@@ -91,6 +88,7 @@
     <div class="container">
         <div class="small text-center text-muted">Copyright &copy; 2019, 포털서비스개발방법론 프로젝트, 김예찬 (컴퓨터교육과)</div>
         <br>
+<!--        <div class="small text-center "><i class="far fa-hand-point-right"></i>&nbsp; 본 사이트는 <a href = "https://startbootstrap.com/">Start Bootstrap</a> 사에서 제공하는 테마를 기반으로 제작되었습니다.&nbsp;<i class="far fa-hand-point-left"></i></div>-->
     </div>
 </footer>
 
@@ -104,15 +102,6 @@
 
 <!-- Custom scripts for this template -->
 <script src="js/creative.min.js"></script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $("#tutorial").on("click", function() {
-            alert("준비 중입니다.");
-        })
-    });
-</script>
 
 </body>
 </html>
