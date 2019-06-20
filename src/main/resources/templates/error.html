@@ -34,12 +34,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="/login">로그인하기</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="/signup">회원가입하기</a>
-                </li>
             </ul>
         </div>
     </div>
@@ -53,27 +47,17 @@
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                 <div class="card card-signin my-5">
                     <div class="card-body">
-                        <h5 class="card-title text-center">회원가입</h5>
-                        <p>회원가입을 완료하면, 이메일 주소와 비밀번호를 이용하여 로그인할 수 있습니다. <i class="fa fa-bullhorn"></i> </p>
-                        <form id = "frm" name = "frm" class="form-signin" method = "post" action = "/signup" enctype = "multipart/form-data">
-                            <div class="form-label-group">
-                                <input id="userName" name = "userName" class="form-control" placeholder="Name" required autofocus>
-                                <label for="userName">이름</label>
-                            </div>
+                        <form class="form-signin">
+                            <h5 class="card-title text-center">오류가 발생하였습니다.</h5>
+                            <p th:text = "${msg}"></p>
 
-                            <div class="form-label-group">
-                                <input type="email" name = "email" id="email" class="form-control" placeholder="Email address" required autofocus>
-                                <label for="email">이메일 주소</label>
-                            </div>
-
-                            <div class="form-label-group">
-                                <input name = "password" type="password" id="password" class="form-control" placeholder="Password" required>
-                                <label for="password">비밀번호</label>
+                            <div class="text-center">
+                                <img th:src="@{/img/error.gif}" alt="오류 발생 ERROR" style = "width: 300px">
                             </div>
 
                             <hr class="my-4">
-                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">회원가입</button>
-                            <a class="btn btn-lg btn-primary btn-block text-uppercase" style="border: yellowgreen; background: yellowgreen;" href="javascript:history.back();">취소</a>
+
+                            <a class="btn btn-lg btn-primary btn-block text-uppercase" th:href = "${return}">돌아가기</a>
                         </form>
                     </div>
                 </div>
@@ -89,7 +73,7 @@
     <div class="container">
         <div class="small text-center text-muted">Copyright &copy; 2019, 포털서비스개발방법론 프로젝트, 김예찬 (컴퓨터교육과)</div>
         <br>
-<!--        <div class="small text-center "><i class  ="far fa-hand-point-right"></i>&nbsp; 본 사이트는 <a href = "https://startbootstrap.com/">Start Bootstrap</a> 사에서 제공하는 테마를 기반으로 제작되었습니다.&nbsp;<i class="far fa-hand-point-left"></i></div>-->
+        <!-- <div class="small text-center "><i class  ="far fa-hand-point-right"></i>&nbsp; 본 사이트는 <a href = "https://startbootstrap.com/">Start Bootstrap</a> 사에서 제공하는 테마를 기반으로 제작되었습니다.&nbsp;<i class="far fa-hand-point-left"></i></div>-->
     </div>
 </footer>
 
