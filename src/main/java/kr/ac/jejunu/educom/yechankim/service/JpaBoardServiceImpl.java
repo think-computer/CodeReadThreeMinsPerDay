@@ -16,7 +16,6 @@ public class JpaBoardServiceImpl implements JpaBoardService {
 
     @Override
     public List<BoardEntity> selectBoardList() throws Exception {
-        //return jpaBoardRepository.findAllByOrderByBoardIdxDesc();
         return jpaBoardRepository.findAllByOrderByBoardIdxDesc();
     }
 
@@ -45,6 +44,4 @@ public class JpaBoardServiceImpl implements JpaBoardService {
     public void deleteBoard(int boardIdx) {
         jpaBoardRepository.deleteById(boardIdx);
     }
-
-
 }

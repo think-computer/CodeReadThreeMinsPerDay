@@ -43,7 +43,7 @@
             <div class="col-sm-9 col-md-7 col-lg-9 mx-auto">
                 <div class="card card-signin my-5" style = "height: 750px;">
                     <div class="card-body">
-                        <h5 class="card-title text-center">게시글 열람 #<span th:text="${board.boardIdx}"></span> </h5>
+                        <h5 class="card-title text-center">게시글 #<span th:text="${board.boardIdx}"></span>번 열람</h5>
                         <form class="form-signin" id="boardForm" method="post">
                             <div class="form-label-group">
                                 <input th:value = "${board.title}" type="text" name="title" id="title" class="form-control" required autofocus>
