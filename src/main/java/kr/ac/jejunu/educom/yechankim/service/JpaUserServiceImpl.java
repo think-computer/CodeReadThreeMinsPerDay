@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import java.io.PrintWriter;
 import java.util.Optional;
 
 @Service
@@ -23,10 +22,6 @@ public class JpaUserServiceImpl implements JpaUserService {
     public boolean isAbleToSignUp(String email) throws Exception {
         Optional<UserEntity> optional = jpaUserRepository.findByEmail(email);
 
-        if (optional.isPresent()) {
-            return false;
-        } else {
-            return true;
-        }
+        return optional.isPresent() ? false : true;
     }
 }

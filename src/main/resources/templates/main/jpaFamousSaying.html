@@ -19,12 +19,10 @@
     <link th:href="@{/vendor/magnific-popup/magnific-popup.css}" rel="stylesheet">
 
     <!-- Theme CSS - Includes Bootstrap -->
-    <link th:href="@{/css/creative.css}" rel="stylesheet">
-    <link th:href="@{/css/login.css}" rel="stylesheet">
-
+    <link th:href="@{/css/main.css}" rel="stylesheet">
 </head>
 <body id="page-top">
-<!-- ${errorMessage} -->
+
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
     <div class="container">
@@ -35,61 +33,61 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto my-2 my-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="/login">로그인하기</a>
+                    <a class="nav-link js-scroll-trigger" href="/jpa/main">코드 읽기</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="/signup">회원가입하기</a>
+                    <a class="nav-link js-scroll-trigger" href="/board">공지사항 확인하기</a>
                 </li>
             </ul>
+<!--            <ul class="navbar-nav ml-auto my-2 my-lg-0">-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link js-scroll-trigger" href="#about">김예찬(think.computer@jejunu.ac.kr) 님 환영합니다.</a>-->
+<!--                </li>-->
+<!--            </ul>-->
         </div>
     </div>
 </nav>
 
 <!-- Masthead -->
 <header class="masthead">
-
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-                <div class="card card-signin my-5">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center justify-content-center text-center">
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">오늘의 명언</h6>
+                    </div>
                     <div class="card-body">
-                        <h5 class="card-title text-center">회원가입</h5>
-                        <p>회원가입을 완료하면, 이메일 주소와 비밀번호를 이용하여 로그인할 수 있습니다. <i class="fa fa-bullhorn"></i> </p>
-                        <form id = "frm" name = "frm" class="form-signin" method = "post" action = "/signup" enctype = "multipart/form-data">
-                            <div class="form-label-group">
-                                <input id="userName" name = "userName" class="form-control" placeholder="Name" required autofocus>
-                                <label for="userName">이름</label>
-                            </div>
+                        <div class="text-center">
+                            <img th:src="${famousSaying.celebPhotoUrl}" class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="height: 15rem;"alt="오늘의 위인">
+                        </div>
+                        <p th:text="${famousSaying.saying}"></p>
+                        <h5 th:text="${famousSaying.celebName}"></h5>
 
-                            <div class="form-label-group">
-                                <input type="email" name = "email" id="email" class="form-control" placeholder="Email address" required autofocus>
-                                <label for="email">이메일 주소</label>
-                            </div>
-
-                            <div class="form-label-group">
-                                <input name = "password" type="password" id="password" class="form-control" placeholder="Password" required>
-                                <label for="password">비밀번호</label>
-                            </div>
-
-                            <hr class="my-4">
-                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">회원가입</button>
-                            <a class="btn btn-lg btn-primary btn-block text-uppercase" style="border: yellowgreen; background: yellowgreen;" href="javascript:history.back();">취소</a>
-                        </form>
+                        <hr class="my-4">
+                        <h6 th:text="${famousSaying.celebInfo}"></h6>
                     </div>
                 </div>
             </div>
+
+            <div class="col-lg-10 align-self-end">
+                <a class="btn btn-primary btn-xl js-scroll-trigger" href="#intro">오늘의 하루 3분 코드 읽기</a>
+                <hr class="divider my-4">
+            </div>
+
+            <div class="col-lg-8 align-self-baseline">
+                <p class="text-white-75 font-weight-light mb-5">튜토리얼이 필요하신가요? <a href="">클릭하세요.</a></p>
+            </div>
+
         </div>
     </div>
-
 </header>
-
 
 <!-- Footer -->
 <footer class="bg-light py-5">
     <div class="container">
         <div class="small text-center text-muted">Copyright &copy; 2019, 포털서비스개발방법론 프로젝트, 김예찬 (컴퓨터교육과)</div>
         <br>
-<!--        <div class="small text-center "><i class  ="far fa-hand-point-right"></i>&nbsp; 본 사이트는 <a href = "https://startbootstrap.com/">Start Bootstrap</a> 사에서 제공하는 테마를 기반으로 제작되었습니다.&nbsp;<i class="far fa-hand-point-left"></i></div>-->
     </div>
 </footer>
 

@@ -5,6 +5,5 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 public interface JpaUserService {
     void saveUser(UserEntity user, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception;
-
     boolean isAbleToSignUp(String email) throws Exception;
 }
