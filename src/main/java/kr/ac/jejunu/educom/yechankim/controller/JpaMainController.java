@@ -1,9 +1,13 @@
 package kr.ac.jejunu.educom.yechankim.controller;
 
+import kr.ac.jejunu.educom.yechankim.entity.BoardEntity;
 import kr.ac.jejunu.educom.yechankim.entity.FamousSayingEntity;
+import kr.ac.jejunu.educom.yechankim.entity.SourceEntity;
 import kr.ac.jejunu.educom.yechankim.service.JpaMainService;
+import kr.ac.jejunu.educom.yechankim.service.MakeBlankProblemForPythonProgramSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,10 +18,10 @@ public class JpaMainController {
     private JpaMainService jpaMainService;
 
     @RequestMapping(value="/jpa/main", method= RequestMethod.GET)
-    public ModelAndView openReadCodes() throws Exception {
+    public ModelAndView openFamousSaying() throws Exception {
         ModelAndView modelAndView = new ModelAndView("main/jpaFamousSaying");
 
-        long maxNo = jpaMainService.getRecordsCount();
+        long maxNo = jpaMainService.getFamousSayingRecordsCount();
 
         FamousSayingEntity famousSaying = jpaMainService.selectFamousSaying(jpaMainService.getRandomNumber((int) maxNo));
         modelAndView.addObject("famousSaying", famousSaying);
@@ -25,5 +29,43 @@ public class JpaMainController {
         return modelAndView;
     }
 
+    @RequestMapping(value="/jpa/main/video", method = RequestMethod.GET)
+    public String openVideoClip1() throws Exception {
+        long maxNo = jpaMainService.getSourceRecordsCount();
+        long idx = jpaMainService.getRandomNumber((int) maxNo);
+        return String.format("redirect:/jpa/main/%d/video", idx);
+    }
 
+    @RequestMapping(value="/jpa/main/{idx}/video", method = RequestMethod.GET)
+    public ModelAndView openVideoClip2(@PathVariable("idx") int idx) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("main/jpaWatchVideo");
+
+        SourceEntity source = jpaMainService.selectSource(idx);
+
+        source.setVideoUrl("https://www.youtube.com/embed/" + source.getVideoUrl().split("https://www.youtube.com/watch")[1].substring(3));
+        modelAndView.addObject("source", source);
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/jpa/main/{idx}/solve", method = RequestMethod.GET)
+    public ModelAndView openSolveProblem(@PathVariable("idx") int idx) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("main/jpaSolveProblem");
+
+        SourceEntity source = jpaMainService.selectSource(idx);
+
+
+        MakeBlankProblemForPythonProgramSource instance =
+                MakeBlankProblemForPythonProgramSource.getInstance();
+        instance.setProblemSource(source.getSource());
+        instance.choosePatternRandomly();
+        instance.makeProblem();
+
+        source.setSource(instance.getProblem());
+
+        modelAndView.addObject("source", source);
+        modelAndView.addObject("answersList", instance.answersList);
+
+        return modelAndView;
+    }
 }

@@ -55,31 +55,29 @@
 <header class="masthead">
     <div class="container h-100">
         <div class="row h-100 align-items-center justify-content-center text-center">
-            <div class="col-lg-6 mb-4">
+            <div class="col-lg-10 mb-4">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">오늘의 명언</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">오늘의 알고리즘</h6>
                     </div>
                     <div class="card-body">
-                        <div class="text-center">
-                            <img th:src="${famousSaying.celebPhotoUrl}" class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="height: 15rem;"alt="오늘의 위인">
-                        </div>
-                        <p th:text="${famousSaying.saying}"></p>
-                        <h5 th:text="${famousSaying.celebName}"></h5>
-
+                        <h2 th:text="${source.title}"></h2>
                         <hr class="my-4">
-                        <h6 th:text="${famousSaying.celebInfo}"></h6>
+
+                        <div class="text-center">
+                            <iframe width="800" height="480" th:src="${source.videoUrl}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-10 align-self-end">
-                <a class="btn btn-primary btn-xl js-scroll-trigger" href="/jpa/main/video">오늘의 하루 3분 코드 읽기</a>
+                <a class="btn btn-primary btn-xl js-scroll-trigger" th:href = "@{'/jpa/main/' + ${source.idx} + '/solve'}">소스 보러가기</a>
                 <hr class="divider my-4">
             </div>
 
             <div class="col-lg-8 align-self-baseline">
-                <p class="text-white-75 font-weight-light mb-5">튜토리얼 영상이 필요하신가요? <a id = "tutorial" href="">클릭하세요.</a></p>
+                <p class="text-white-75 font-weight-light mb-5">비디오 시청이 끝난 경우 위 버튼을 클릭하세요.</p>
             </div>
 
         </div>
@@ -104,15 +102,6 @@
 
 <!-- Custom scripts for this template -->
 <script src="js/creative.min.js"></script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $("#tutorial").on("click", function() {
-            alert("준비 중입니다.");
-        })
-    });
-</script>
 
 </body>
 </html>

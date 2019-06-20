@@ -41,12 +41,12 @@ public class JpaBoardController {
 
     @RequestMapping(value="/jpa/board/{boardIdx}", method=RequestMethod.GET)
     public ModelAndView openBoardDetail(@PathVariable("boardIdx") int boardIdx) throws Exception{
-        ModelAndView mv = new ModelAndView("/board/jpaBoardDetail");
+        ModelAndView modelAndView = new ModelAndView("/board/jpaBoardDetail");
 
         BoardEntity board = jpaBoardService.selectBoardDetail(boardIdx);
-        mv.addObject("board", board);
+        modelAndView.addObject("board", board);
 
-        return mv;
+        return modelAndView;
     }
 
     @RequestMapping(value="/jpa/board/{boardIdx}", method=RequestMethod.PUT)
