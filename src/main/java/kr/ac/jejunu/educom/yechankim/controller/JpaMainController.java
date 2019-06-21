@@ -57,16 +57,8 @@ public class JpaMainController {
 
         SourceEntity source = jpaMainService.selectSource(idx);
 
-
-//        MakeBlankProblemForPythonServiceImpl instance =
-//                MakeBlankProblemForPythonServiceImpl.getInstance();
-//        instance.setProblemSource(source.getSource());
-//        instance.choosePatternRandomly();
-//        instance.makeProblem();
-//
-//        source.setSource(instance.getProblem());
-
         makeBlankProblemForPythonService.setForThisService(source.getSource());
+        source.setSource(makeBlankProblemForPythonService.getProblem());
 
         modelAndView.addObject("source", source);
         modelAndView.addObject("answersList", makeBlankProblemForPythonService.getAnswersList());
@@ -84,4 +76,6 @@ public class JpaMainController {
 
         return modelAndView;
     }
+
+
 }

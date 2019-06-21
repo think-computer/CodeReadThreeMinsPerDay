@@ -8,20 +8,17 @@ import java.util.regex.Pattern;
 
 @Service
 public class MakeBlankProblemForPythonServiceImpl implements MakeBlankProblemForPythonService {
-    SecureRandom random = new SecureRandom();
-    int maxNo = 2;
-    String source;
-    String[] codes;
-    char firstBlankSymbol = 'ⓐ';
-    int[] randomlyChosenPatternListList;
-    String[] answersList;
-
-    public MakeBlankProblemForPythonServiceImpl() {
-        process();
-    }
+    public SecureRandom random = new SecureRandom();
+    public int maxNo = 2;
+    public String source;
+    public String[] codes;
+    public char firstBlankSymbol = 'ⓐ';
+    public int[] randomlyChosenPatternListList;
+    public String[] answersList;
 
     @Override
     public void setForThisService(String src) {
+        process();
         setProblemSource(src);
         choosePatternRandomly();
         makeProblem();
