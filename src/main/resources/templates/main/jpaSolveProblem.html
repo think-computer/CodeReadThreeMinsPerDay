@@ -19,14 +19,15 @@
     <link th:href="@{/vendor/magnific-popup/magnific-popup.css}" rel="stylesheet">
 
     <!-- Theme CSS - Includes Bootstrap -->
-    <link th:href="@{/css/main.css}" rel="stylesheet">
+    <!-- <link th:href="@{/css/main.css}" rel="stylesheet"> -->
+    <link th:href="@{/css/board.css}" rel="stylesheet">
 </head>
 <body id="page-top">
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
     <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="index">하루 3분 코드 읽기</a>
+        <a class="navbar-brand js-scroll-trigger" href="/index">하루 3분 코드 읽기</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -55,6 +56,7 @@
 <header class="masthead">
     <div class="container h-100">
         <div class="row h-100 align-items-center justify-content-center text-center">
+
             <div class="col-lg-10 mb-4">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
@@ -65,19 +67,38 @@
                         <hr class="my-4">
 
                         <div class="form-label-group">
-                            <textarea style = "height: 355px;" name = "source" id = "source" class="form-control" th:placeholder="${source.source}"></textarea>
+                            <textarea style = "height: 355px; font-size: larger; font-weight: bolder" name = "source" id = "source" class="form-control" th:placeholder="${source.source}"></textarea>
                         </div>
+
+                        <form class = "form-signin" id = "sourceForm" name = "sourceForm" method = "post" enctype="multipart/form-data"  th:action = "@{'/jpa/main/' + ${source.idx} + '/done'}">
+                            <!-- th:action = "@{'/jpa/main/' + ${source.idx} + '/done'}"  -->
+                            <div class="form-label-group">
+                                <input type="text" name="a" id="a" class="form-control" placeholder="Title" required autofocus>
+                                <label for="a">빈칸 ⓐ</label>
+                            </div>
+
+                            <div class="form-label-group" th:if="${#lists.size(answersList)} == 2">
+                                <input type="text" name="b" id="b" class="form-control" placeholder="Title" required autofocus>
+                                <label for="b">빈칸 ⓑ</label>
+                            </div>
+
+
+                            <input type="hidden" id = "idx" name = "idx" th:value="${source.idx}">
+                            <input type="hidden" id = "ans1" name = "ans1" th:value="${answersList[0]}">
+                            <input type="hidden" id = "ans2" name = "ans2" th:value="${answersList[1]}" th:if="${#lists.size(answersList)} == 2">
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-10 align-self-end">
-                <a class="btn btn-primary btn-xl js-scroll-trigger" th:href = "@{'/jpa/main/' + ${source.idx} + '/solve'}">제출하기</a>
+                <input type = "submit" id = "submit" value = "제출하기" class="btn btn-primary btn-xl js-scroll-trigger">
+                <!-- <a class="btn btn-primary btn-xl js-scroll-trigger" th:href = "@{'/jpa/main/' + ${source.idx} + '/solve'}">제출하기</a> -->
                 <hr class="divider my-4">
             </div>
+            </form>
 
             <div class="col-lg-8 align-self-baseline">
-                <p class="text-white-75 font-weight-light mb-5">비디오 시청이 끝난 경우 위 버튼을 클릭하세요.</p>
+                <p class="text-white-75 font-weight-light mb-5">앞서 시청한 비디오를 기반으로 위 알고리즘의 빈칸을 추론하여 작성하세요. <br>작성이 완료된 경우, '제출하기' 버튼을 클릭하세요.</p>
             </div>
 
         </div>
@@ -106,8 +127,47 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-        $("#btn").on("click", function() {
-            $("#btn").href = "/jpa/main/"+$("#idx")+"/solve";
+        var form = $("#sourceForm")[0];
+
+        $("#submit").on("click", function() {
+            var a = $("#a").val().trim();
+            var b = null;
+            if ($("#b") != null) b = $("#b").val().trim();
+
+            if (a === "" || b === "") {
+                alert("빈칸을 완성하십시오.");
+                return;
+            }
+
+            var ans1 = $("#ans1").val().trim();
+            var ans2 = null;
+            if ($("#ans2") != null) ans2 = $("#ans2").val().trim();
+
+            var count = 0;
+            if (a == ans1) {
+                count += 1;
+                if (b != null) {
+                    if (b == ans2) {
+                        count += 1;
+                    }
+                }
+            }
+
+            if (b != null) {
+                if (count == 2) {
+                    alert("훌륭합니다. 정답입니다. :)");
+                } else {
+                    alert("제가 생각했던 정답은 빈칸 ⓐ는 " + ans1 + "ⓑ는 " + ans2 + "이었습니다. :)");
+                }
+            } else {
+                if (count == 1) {
+                    alert("훌륭합니다. 정답입니다. :)");
+                } else {
+                    alert("제가 생각했던 정답은 " + ans1 + "이었습니다. :)");
+                }
+            }
+
+            // location.href = "/jpa/main/" + $("#idx").val() + "/done";
         })
     });
 </script>
