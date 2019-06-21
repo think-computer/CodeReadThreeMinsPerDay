@@ -63,7 +63,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">오늘의 알고리즘</h6>
                     </div>
                     <div class="card-body">
-                        <h2 th:text="${source.title}"></h2>
+                        <h2 th:text="${source.title} + ' 알고리즘 빈칸 채우기'"></h2>
                         <hr class="my-4">
 
                         <div class="form-label-group">
@@ -98,7 +98,7 @@
             </form>
 
             <div class="col-lg-8 align-self-baseline">
-                <p class="text-white-75 font-weight-light mb-5">앞서 시청한 비디오를 기반으로 위 알고리즘의 빈칸을 추론하여 작성하세요. <br>작성이 완료된 경우, '제출하기' 버튼을 클릭하세요.</p>
+                <p class="text-white-75 font-weight-light mb-5">위 알고리즘의 빈칸을 추론하여 작성하고, '제출하기' 버튼을 클릭하세요.</p>
             </div>
 
         </div>
@@ -112,17 +112,6 @@
         <br>
     </div>
 </footer>
-
-<!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Plugin JavaScript -->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-
-<!-- Custom scripts for this template -->
-<script src="js/creative.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
