@@ -1,10 +1,10 @@
 package kr.ac.jejunu.educom.yechankim.controller;
 
-import kr.ac.jejunu.educom.yechankim.entity.BoardEntity;
 import kr.ac.jejunu.educom.yechankim.entity.FamousSayingEntity;
 import kr.ac.jejunu.educom.yechankim.entity.SourceEntity;
 import kr.ac.jejunu.educom.yechankim.service.JpaMainService;
-import kr.ac.jejunu.educom.yechankim.service.MakeBlankProblemForPythonProgramSource;
+import kr.ac.jejunu.educom.yechankim.service.MakeBlankProblemForPythonService;
+import kr.ac.jejunu.educom.yechankim.service.MakeBlankProblemForPythonServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class JpaMainController {
     @Autowired
     private JpaMainService jpaMainService;
+
+    @Autowired
+    private MakeBlankProblemForPythonService makeBlankProblemForPythonService;
 
     @RequestMapping(value="/jpa/main", method= RequestMethod.GET)
     public ModelAndView openFamousSaying() throws Exception {
@@ -55,16 +58,18 @@ public class JpaMainController {
         SourceEntity source = jpaMainService.selectSource(idx);
 
 
-        MakeBlankProblemForPythonProgramSource instance =
-                MakeBlankProblemForPythonProgramSource.getInstance();
-        instance.setProblemSource(source.getSource());
-        instance.choosePatternRandomly();
-        instance.makeProblem();
+//        MakeBlankProblemForPythonServiceImpl instance =
+//                MakeBlankProblemForPythonServiceImpl.getInstance();
+//        instance.setProblemSource(source.getSource());
+//        instance.choosePatternRandomly();
+//        instance.makeProblem();
+//
+//        source.setSource(instance.getProblem());
 
-        source.setSource(instance.getProblem());
+        makeBlankProblemForPythonService.setForThisService(source.getSource());
 
         modelAndView.addObject("source", source);
-        modelAndView.addObject("answersList", instance.answersList);
+        modelAndView.addObject("answersList", makeBlankProblemForPythonService.getAnswersList());
 
         return modelAndView;
     }
