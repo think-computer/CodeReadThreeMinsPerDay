@@ -66,7 +66,7 @@ public class JpaMainController {
         return modelAndView;
     }
 
-    @RequestMapping(value="/jpa/main/{idx}/done", method = RequestMethod.POST)
+    @RequestMapping(value="/jpa/main/{idx}/done", method = RequestMethod.GET)
     public ModelAndView openDoneScreen (@PathVariable("idx") int idx) throws Exception {
         ModelAndView modelAndView = new ModelAndView("main/jpaDone");
 
@@ -77,5 +77,15 @@ public class JpaMainController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/jpa/mypage")
+    public String openMyPage1() throws Exception {
+        return "redirect:/jpa/mypage/1";
+    }
 
+    @RequestMapping(value="/jpa/mypage/{userIdx}", method = RequestMethod.GET)
+    public ModelAndView openMyPage2 (@PathVariable("userIdx") int userIdx) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("main/jpaMyPage");
+
+        return modelAndView;
+    }
 }
