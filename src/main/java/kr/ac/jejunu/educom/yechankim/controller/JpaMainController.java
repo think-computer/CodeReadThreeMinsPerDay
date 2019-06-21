@@ -66,7 +66,7 @@ public class JpaMainController {
         return modelAndView;
     }
 
-    @RequestMapping(value="/jpa/main/{idx}/done", method = RequestMethod.GET)
+    @RequestMapping(value="/jpa/main/{idx}/done", method = RequestMethod.POST)
     public ModelAndView openDoneScreen (@PathVariable("idx") int idx) throws Exception {
         ModelAndView modelAndView = new ModelAndView("main/jpaDone");
 
